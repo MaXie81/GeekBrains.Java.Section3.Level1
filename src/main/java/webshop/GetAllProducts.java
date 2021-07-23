@@ -39,7 +39,7 @@ public class GetAllProducts extends HttpServlet {
                     "</head>\n" +
                     "<body>"
         );
-        resp.getWriter(). println(
+        resp.getWriter(). printf(
                 "<table>\n" +
                 "<caption>All products:</caption>\n" +
                 "<tr>" +
