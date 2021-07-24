@@ -6,46 +6,45 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class GetAllProducts extends HttpServlet {
-    private LinkedHashMap<String, Float> listProduct = new LinkedHashMap<>();
+    private HashMap<String, Float> listProduct = new HashMap<>();
     @Override
     public void init() throws ServletException {
-        listProduct.put("Product1", 30.50f);
-        listProduct.put("Product2", 110f);
-        listProduct.put("Product3", 128f);
-        listProduct.put("Product4", 67.80f);
-        listProduct.put("Product5", 81.20f);
-        listProduct.put("Product6", 215f);
-        listProduct.put("Product7", 87.60f);
-        listProduct.put("Product8", 55f);
-        listProduct.put("Product9", 263f);
-        listProduct.put("Product10", 32.50f);
+        listProduct.put("Хлеб", 30.50f);
+        listProduct.put("Курица", 110f);
+        listProduct.put("Масло сливочное", 128f);
+        listProduct.put("Чай черный", 67.80f);
+        listProduct.put("Сыр плавленный", 81.20f);
+        listProduct.put("Колбаса докторская", 215f);
+        listProduct.put("Помидоры", 87.60f);
+        listProduct.put("Картофель", 55f);
+        listProduct.put("Конфеты шоколадные", 263f);
+        listProduct.put("Молоко 1л", 32.50f);
     }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Product product;
         int i = 0;
-
+        resp.setCharacterEncoding("UTF-8");
         resp.getWriter().printf(
             "<!DOCTYPE html>\n" +
                     "<html lang=\"en\">\n" +
                     "<head>\n" +
                     "<meta charset=\"UTF-8\">\n" +
-                    "<title>List of products</title>\n" +
+                    "<title>Spisok productov</title>\n" +
                     "</head>\n" +
                     "<body>"
         );
-        resp.getWriter(). println(
+        resp.getWriter().printf(
                 "<table>\n" +
-                "<caption>All products:</caption>\n" +
+                "<caption>Список продуктов:</caption>\n" +
                 "<tr>" +
                 "<th>Id</th>" +
-                "<th>Name</th>" +
-                "<th>Cost</th>" +
+                "<th>Имя</th>" +
+                "<th>Цена</th>" +
                 "</tr>"
         );
         for (Map.Entry pair : listProduct.entrySet()) {
