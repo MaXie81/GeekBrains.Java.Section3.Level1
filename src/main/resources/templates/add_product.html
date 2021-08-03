@@ -13,23 +13,27 @@
     <body>
         <div class="container-sm">
             <div class="col-6">
-                <form method="post" th:action="@{'/product/add'}" class="row g-2">
+                <form method="post" class="row g-2">
                     <legend>Продукт</legend>
                     <div class="col-12">
                         <label for="id" class="form-label"><b>Id</b></label>
-                        <input type="number" name="id" class="form-control" id="id" th:value="${id}" readonly>
+                        <input type="number" name="id" class="form-control" id="id" th:value="${product.id}" readonly>
                     </div>
                     <div class="col-12">
                         <label for="title" class="form-label"><b>Наименование</b></label>
-                        <input type="text" name="title" class="form-control" id="title" placeholder="Наименование">
+                        <input type="text" name="title" class="form-control" id="title" th:value="${product.title}">
                     </div>
                     <div class="col-12">
                         <label for="cost" class="form-label"><b>Цена</b></label>
-                        <input type="number" name="cost" class="form-control" id="cost" step="any" placeholder="Цена">
+                        <div class="input-group">
+                            <input type="number" name="cost" class="form-control" id="cost" step="any" th:value="${product.cost}">
+                            <button type="submit" class="btn btn-outline-secondary" th:formaction=@{'/product/add/inc'}>+10</button>
+                            <button type="submit" class="btn btn-outline-secondary" th:formaction=@{'/product/add/dec'}>-10</button>
+                        </div>
                     </div>
                     <div class="col-12 mt-3">
                         <a type="button" class="btn btn-primary" th:href=@{'/product/all'}>Назад</a>
-                        <button type="submit" class="btn btn-primary" th:href=@{'/product/add'}>Добавить</button>
+                        <button type="submit" class="btn btn-primary" th:formaction=@{'/product/add'}>Добавить</button>
                     </div>
                 </form>
             </div>
