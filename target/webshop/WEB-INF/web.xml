@@ -5,14 +5,11 @@
          version="4.0">
   <display-name>Archetype Created Web Application</display-name>
 
-  <servlet>
-    <servlet-name>AllProducts</servlet-name>
-    <servlet-class>webshop.GetAllProducts</servlet-class>
-  </servlet>
-
-  <servlet-mapping>
-    <servlet-name>AllProducts</servlet-name>
-    <url-pattern>/allProducts</url-pattern>
-  </servlet-mapping>
-
+  <!-- Encoding for jsp-pages to UTF-8 -->
+  <jsp-config>
+    <jsp-property-group>
+      <url-pattern>*.jsp</url-pattern>
+      <page-encoding>UTF-8</page-encoding>
+    </jsp-property-group>
+  </jsp-config>
 </web-app>
