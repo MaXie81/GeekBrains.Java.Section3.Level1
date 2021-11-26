@@ -11,25 +11,22 @@ import java.util.stream.Collectors;
 @Component
 @Scope("prototype")
 public class Cart {
-    private List<Product> productList = new ArrayList<>();
+    private List<Product> listOfProduct = new ArrayList<>();
 
-    public List<Product> getProductList() {
-        return productList;
-    }
+    public List<Product> getListOfProduct() {return listOfProduct;}
     public void addProduct(Product product) {
-        productList.add(product);
-    }
+        listOfProduct.add(product);}
     public void findAndRemoveProduct(String name, boolean isAll) {
-        Product product = productList.stream().filter(p -> p.getName().equals(name)).findFirst().get();
+        Product product = listOfProduct.stream().filter(p -> p.getName().equals(name)).findFirst().get();
 
         if (product == null) return;
 
         if (isAll)
-            productList.removeIf(p -> p == product);
+            listOfProduct.removeIf(p -> p == product);
         else
-            productList.remove(product);
+            listOfProduct.remove(product);
     }
     public String displayProductList() {
-        return productList.stream().map(Product::toString).collect(Collectors.joining("\n"));
+        return listOfProduct.stream().map(Product::toString).collect(Collectors.joining("\n"));
     }
 }

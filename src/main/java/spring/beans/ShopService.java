@@ -8,17 +8,17 @@ import java.util.List;
 
 @Component
 public class ShopService {
-    private ProductRepository repository;
+    private ProductRepository assortment;
 
     @Autowired
-    public ShopService(ProductRepository repository) {
-        this.repository = repository;
+    public ShopService(ProductRepository assortment) {
+        this.assortment = assortment;
     }
 
     public List<Product> getAllProducts() {
-        return repository.getListOfAvailableProducts();
+        return assortment.getListOfAvailableProducts();
     }
     public Product getProductByName(String name) {
-        return repository.getListOfAvailableProducts().stream().filter(p -> p.getName().equals(name)).findFirst().get();
+        return assortment.getListOfAvailableProducts().stream().filter(p -> p.getName().equals(name)).findFirst().get();
     }
 }
