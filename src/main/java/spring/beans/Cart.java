@@ -13,12 +13,8 @@ import java.util.stream.Collectors;
 public class Cart {
     private List<Product> productList = new ArrayList<>();
 
-    public List<Product> getProductList() {
-        return productList;
-    }
-    public void addProduct(Product product) {
-        productList.add(product);
-    }
+    public List<Product> getProductList() {return productList;}
+    public void addProduct(Product product) {productList.add(product);}
     public void findAndRemoveProduct(String name, boolean isAll) {
         Product product = productList.stream().filter(p -> p.getName().equals(name)).findFirst().get();
 
