@@ -1,31 +1,30 @@
 package spring.application;
 
-import spring.beans.ShopCart;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import spring.beans.Cart;
+import spring.beans.ProductService;
 import spring.classes.Client;
-import spring.classes.SpringContext;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class Shop {
     public static void main(String[] args) {
-        List<Client> listOfClient = new ArrayList<>();
+        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(ContextConfig.class);
 
-        for (int i = 0; i < 3; i++) {
-            listOfClient.add(new Client(SpringContext.getContext().getBean(ShopCart.class)));
-        }
+        Client client1 = new Client(context.getBean(Cart.class));
+        Client client2 = new Client(context.getBean(Cart.class));
 
-        listOfClient.get(1).getShopCart().putInProduct(1);
-        listOfClient.get(1).getShopCart().putInProduct(1);
-        listOfClient.get(1).getShopCart().putInProduct(3);
-        listOfClient.get(1).getShopCart().putOutProduct(1, true);
+        client1.getShopCart().addProduct(context.getBean(ProductService.class).getProductByName("Хлеб"));
+        client1.getShopCart().addProduct(context.getBean(ProductService.class).getProductByName("Хлеб"));
+        client1.getShopCart().addProduct(context.getBean(ProductService.class).getProductByName("Мясо"));
+        client1.getShopCart().removeProduct(client1.getShopCart().getProductByName("Хлеб"), true);
 
-        listOfClient.get(2).getShopCart().putInProduct(2);
-        listOfClient.get(2).getShopCart().putInProduct(3);
-        listOfClient.get(2).getShopCart().putInProduct(3);
-        listOfClient.get(2).getShopCart().putOutProduct(3, false);
+        client2.getShopCart().addProduct(context.getBean(ProductService.class).getProductByName("Молоко"));
+        client2.getShopCart().addProduct(context.getBean(ProductService.class).getProductByName("Мясо"));
+        client2.getShopCart().addProduct(context.getBean(ProductService.class).getProductByName("Мясо"));
+        client2.getShopCart().removeProduct(client2.getShopCart().getProductByName("Мясо"), false);
 
-        System.out.println("корзина Клиента 1:\n" + listOfClient.get(1).getShopCart().getListOfPruduct());
-        System.out.println("корзина Клиента 2:\n" + listOfClient.get(2).getShopCart().getListOfPruduct());
+        System.out.println("корзина Клиента 1:\n" + client1.getShopCart().displayProductList());
+        System.out.println("корзина Клиента 2:\n" + client2.getShopCart().displayProductList());
+
+        context.close();
     }
 }

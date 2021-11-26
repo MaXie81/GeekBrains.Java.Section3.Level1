@@ -16,9 +16,9 @@ public class ProductService {
     }
 
     public List<Product> getAllProduct() {
-        return repository.getListOfProduct();
+        return repository.getProductList();
     }
-    public Product getProductById(long id) {
-        return repository.getListOfProduct().stream().filter(p -> p.getId() == id).findFirst().get();
+    public Product getProductByName(String name) {
+        return repository.getProductList().stream().filter(p -> p.getName().equals(name)).findFirst().get();
     }
 }

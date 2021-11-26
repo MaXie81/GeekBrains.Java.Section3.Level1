@@ -1,9 +1,11 @@
 package spring.classes;
 
+import java.util.Objects;
+
 public class Product {
-    private long id;
-    private String name;
-    private float price;
+    private final long id;
+    private final String name;
+    private final float price;
 
     public Product(long id, String name, float price) {
         this.id = id;
@@ -19,16 +21,16 @@ public class Product {
         return name;
     }
 
-    public float getPrice() {
-        return price;
+    @Override
+    public String toString() {
+        return "[\"" + name + "\" : " + price + "]";
     }
 
     @Override
-    public String toString() {
-        return "Product{" +
-                "id = " + id +
-                ", name = '" + name + '\'' +
-                ", price = " + price +
-                '}';
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Product)) return false;
+        Product product = (Product) o;
+        return getName().equals(product.getName());
     }
 }

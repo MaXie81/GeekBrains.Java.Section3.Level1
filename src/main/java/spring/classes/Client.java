@@ -1,15 +1,15 @@
 package spring.classes;
 
-import spring.beans.ShopCart;
+import spring.beans.Cart;
 
 public class Client {
-    private ShopCart shopCart;
+    private Cart cart;
 
-    public Client(ShopCart shopCart) {
-        this.shopCart = shopCart;
+    public Client(Cart cart) {
+        this.cart = cart;
     }
 
-    public ShopCart getShopCart() {
-        return shopCart;
+    public Cart getShopCart() {
+        return cart;
     }
 }

@@ -9,17 +9,17 @@ import java.util.List;
 
 @Component
 public class ProductRepository {
-    private List<Product> listOfProduct;
+    private List<Product> productList;
 
     @PostConstruct
     private void init() {
-        listOfProduct = new ArrayList<>();
-        listOfProduct.add(new Product(1, "Хлеб", 31.20f));
-        listOfProduct.add(new Product(2, "Молоко", 57.63f));
-        listOfProduct.add(new Product(3, "Мясо", 416.00f));
+        productList = new ArrayList<>();
+        productList.add(new Product(1, "Хлеб", 31.20f));
+        productList.add(new Product(2, "Молоко", 57.63f));
+        productList.add(new Product(3, "Мясо", 416.00f));
     }
 
-    public List<Product> getListOfProduct() {
-        return listOfProduct;
+    public List<Product> getProductList() {
+        return productList;
     }
 }
