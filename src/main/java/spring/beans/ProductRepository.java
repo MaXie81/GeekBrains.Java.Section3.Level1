@@ -4,19 +4,30 @@ import org.springframework.stereotype.Component;
 import spring.classes.Product;
 
 import javax.annotation.PostConstruct;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
 @Component
 public class ProductRepository {
-    private List<Product> listOfAvailableProducts;
+    private final String FILE_NAME = "products.data";
+    private final String FILE_TEXT_SEPARATOR = "/";
+    private List<Product> listOfAvailableProducts = new ArrayList<>();;
 
     @PostConstruct
     private void init() {
-        listOfAvailableProducts = new ArrayList<>();
-        listOfAvailableProducts.add(new Product(1, "Хлеб", 31.20f));
-        listOfAvailableProducts.add(new Product(2, "Молоко", 57.63f));
-        listOfAvailableProducts.add(new Product(3, "Мясо", 416.00f));
+        try {
+            ClassLoader loader = this.getClass().getClassLoader();
+            BufferedReader br = new BufferedReader(new InputStreamReader(loader.getResourceAsStream(FILE_NAME)));
+
+            while (br.ready()) {
+                String[] arrWord = br.readLine().split(FILE_TEXT_SEPARATOR);
+                listOfAvailableProducts.add(new Product(Integer.valueOf(arrWord[0]), arrWord[1], Float.valueOf(arrWord[2])));
+            }
+            System.out.println(listOfAvailableProducts);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public List<Product> getListOfAvailableProducts() {
