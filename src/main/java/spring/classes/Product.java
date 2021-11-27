@@ -1,13 +1,11 @@
 package spring.classes;
 
-import java.util.Objects;
-
 public class Product {
-    private final long id;
+    private final int id;
     private final String name;
     private final float price;
 
-    public Product(long id, String name, float price) {
+    public Product(int id, String name, float price) {
         this.id = id;
         this.name = name;
         this.price = price;

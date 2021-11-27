@@ -26,7 +26,7 @@ public class Cart {
         else
             listOfProduct.remove(product);
     }
-    public String displayProductList() {
+    public String lookProductList() {
         return listOfProduct.stream().map(Product::toString).collect(Collectors.joining("\n"));
     }
 }

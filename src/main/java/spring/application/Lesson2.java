@@ -16,6 +16,7 @@ public class Lesson2 {
 
         client1.getShopCart().addProduct(shop.getProductByName("Хлеб"));
         client1.getShopCart().addProduct(shop.getProductByName("Хлеб"));
+        client1.getShopCart().addProduct(shop.getProductByName("Картофель"));
         client1.getShopCart().addProduct(shop.getProductByName("Мясо"));
         client1.getShopCart().findAndRemoveProduct("Хлеб", true);
 
@@ -24,8 +25,8 @@ public class Lesson2 {
         client2.getShopCart().addProduct(shop.getProductByName("Мясо"));
         client2.getShopCart().findAndRemoveProduct("Мясо", false);
 
-        System.out.println("корзина Клиента 1:\n" + client1.getShopCart().displayProductList());
-        System.out.println("корзина Клиента 2:\n" + client2.getShopCart().displayProductList());
+        System.out.println("корзина Клиента 1:\n" + client1.getShopCart().lookProductList());
+        System.out.println("корзина Клиента 2:\n" + client2.getShopCart().lookProductList());
 
         context.close();
     }

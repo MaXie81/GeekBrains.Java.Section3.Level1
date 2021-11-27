@@ -11,7 +11,7 @@ public class ShopService {
     private ProductRepository assortment;
 
     @Autowired
-    public ShopService(ProductRepository assortment) {
+    public void setAssortment(ProductRepository assortment) {
         this.assortment = assortment;
     }
 
