@@ -20,11 +20,16 @@ public class ProductService {
     public List<Product> getAllProducts() {
         return new ArrayList<>(assortment.getListOfAvailableProducts());
     }
-    public void addProduct(String name, Float price) {
-        int maxId = assortment.getListOfAvailableProducts().stream().map(Product::getId).max(Integer::compare).get();
-        assortment.addProduct(new Product(maxId, name, price));
+    public void addProduct(Product product) {
+        assortment.addProduct(product);
+    }
+    public Product getProductById(Integer id) {
+        return assortment.getListOfAvailableProducts().stream().filter(p -> p.getId() == id).findFirst().orElseGet(null);
     }
     public Product getProductByName(String name) {
-        return assortment.getListOfAvailableProducts().stream().filter(p -> p.getName().equals(name)).findFirst().get();
+        return assortment.getListOfAvailableProducts().stream().filter(p -> p.getTitle().equals(name)).findFirst().orElseGet(null);
+    }
+    public int getProductLastId() {
+        return assortment.getListOfAvailableProducts().stream().map(Product::getId).max(Integer::compare).get();
     }
 }

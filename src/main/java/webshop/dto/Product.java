@@ -2,28 +2,28 @@ package webshop.dto;
 
 public class Product {
     private final Integer id;
-    private final String name;
-    private final float price;
+    private final String title;
+    private final float cost;
 
-    public Product(int id, String name, float price) {
+    public Product(int id, String title, float cost) {
         this.id = id;
-        this.name = name;
-        this.price = price;
+        this.title = title;
+        this.cost = cost;
     }
 
     public Integer getId() {
         return id;
     }
 
-    public String getName() {
-        return name;
+    public String getTitle() {
+        return title;
     }
 
-    public float getPrice() { return price; }
+    public float getCost() { return cost; }
 
     @Override
     public String toString() {
-        return "[\"" + name + "\" : " + price + "]";
+        return "[\"" + title + "\" : " + cost + "]";
     }
 
     @Override
@@ -31,7 +31,7 @@ public class Product {
         if (this == o) return true;
         if (!(o instanceof Product)) return false;
         Product product = (Product) o;
-        return getName().equals(product.getName());
+        return getTitle().equals(product.getTitle());
     }
 }
 
