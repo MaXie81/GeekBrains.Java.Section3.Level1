@@ -12,7 +12,7 @@ import org.thymeleaf.spring5.view.ThymeleafViewResolver;
 
 @EnableWebMvc
 @Configuration
-@ComponentScan("webshop")
+@ComponentScan("webshop/*")
 public class AppConfig implements WebMvcConfigurer {
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {

@@ -6,13 +6,18 @@ import webshop.dto.Product;
 import javax.annotation.PostConstruct;
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @Component
 public class ProductRepository {
-    private final String FILE_NAME = "products.data";
+    private final String FILE_NAME = "1.txt"; // "products.data";
     private final String FILE_TEXT_SEPARATOR = "/";
-    private List<Product> listOfAvailableProducts = new ArrayList<>();;
+    private List<Product> listOfAvailableProducts = new ArrayList<>();
+
+//    public ProductRepository() {
+//        listOfAvailableProducts = new ArrayList<>(Arrays.asList(new Product(1, "Молоко", 47.15f)));
+//    }
 
     @PostConstruct
     private void init() {

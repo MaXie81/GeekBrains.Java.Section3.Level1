@@ -61,7 +61,7 @@
     </dependency>
   </dependencies>
   <build>
-    <finalName>webapptest</finalName>
+    <finalName>WebShop</finalName>
     <plugins>
       <plugin>
         <groupId>org.apache.tomcat.maven</groupId>
@@ -72,7 +72,7 @@
           <server>tomcatserver</server>
           <username>admin</username>
           <password>admin</password>
-          <path>/webapptest</path>
+          <path>/webshop</path>
           <update>true</update>
         </configuration>
       </plugin>
