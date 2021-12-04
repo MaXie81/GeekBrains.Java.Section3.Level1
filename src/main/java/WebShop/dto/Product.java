@@ -1,5 +1,8 @@
 package webshop.dto;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 public class Product {
     private final Integer id;
     private final String title;
