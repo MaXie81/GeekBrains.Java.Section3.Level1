@@ -1,6 +1,6 @@
-package dao;
+package hibernate.service;
 
-import dto.Product;
+import hibernate.dto.Product;
 
 import java.util.List;
 

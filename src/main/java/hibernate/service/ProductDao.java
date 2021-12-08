@@ -1,17 +1,26 @@
-package dao;
+package hibernate.service;
 
-import dto.Product;
+import hibernate.dto.Product;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.springframework.stereotype.Service;
 
+import javax.annotation.PostConstruct;
 import java.util.List;
 
+@Service
 public class ProductDao implements IProductDao {
+    private SessionService sessionService;
     private Session session;
     private Transaction transaction;
 
-    public ProductDao(Session session) {
-        this.session = session;
+    public ProductDao(SessionService sessionService) {
+        this.sessionService = sessionService;
+    }
+
+    @PostConstruct
+    public void postConstruct() {
+        this.session = sessionService.getSession();
     }
 
     @Override

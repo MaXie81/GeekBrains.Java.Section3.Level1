@@ -1,17 +1,15 @@
-import dao.ProductDao;
-import dto.Product;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.cfg.Configuration;
+package hibernate;
+
+import hibernate.configuration.ContextConfig;
+import hibernate.service.ProductDao;
+import hibernate.dto.Product;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 public class Lesson5 {
     public static void main(String[] args) {
-        SessionFactory sessionFactory = new Configuration()
-                .configure("hibernate.cfg.xml")
-                .buildSessionFactory();
-        Session session = sessionFactory.openSession();
+        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(ContextConfig.class);
 
-        ProductDao productDao = new ProductDao(session);
+        ProductDao productDao = context.getBean("productDao", ProductDao.class);
 
         System.out.println(productDao.saveOrUpdate(new Product("Хлеб", 25)));
 
@@ -31,7 +29,6 @@ public class Lesson5 {
 
         System.out.println("Итоговый список того, что содержится в таблице PRODUCT: " + productDao.findAll());
 
-        session.close();
-        sessionFactory.close();
+        context.close();
     }
 }

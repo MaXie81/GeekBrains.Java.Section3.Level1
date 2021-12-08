@@ -1,4 +1,4 @@
-package dto;
+package hibernate.dto;
 
 import javax.persistence.*;
 
