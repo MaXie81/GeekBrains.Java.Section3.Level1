@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class ProductDao implements IProductDao {
+public class ProductDao implements IEntityDao {
     private SessionService sessionService;
     private Session session;
     private Transaction transaction;

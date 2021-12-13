@@ -11,12 +11,11 @@ public class Lesson6 {
 
         ProductDao productDao = context.getBean("productDao", ProductDao.class);
 
-        System.out.println(productDao.saveOrUpdate(new Product("Хлеб", 25)));
+//        System.out.println(productDao.saveOrUpdate(new Product("Хлеб", 25)));
+//        System.out.println(productDao.saveOrUpdate(new Product("Молоко", 50)));
+//        System.out.println(productDao.saveOrUpdate(new Product("Сосиски", 250)));
 
-        System.out.println(productDao.saveOrUpdate(new Product("Молоко", 50)));
-        System.out.println(productDao.saveOrUpdate(new Product("Сосиски", 250)));
-
-        System.out.println("метод findById: " + productDao.findById(3L));
+        System.out.println("метод findById: " + productDao.findById(2L));
 
         productDao.deleteById(3L);
         System.out.println(productDao.findById(3L));
