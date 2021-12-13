@@ -5,7 +5,6 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.PostConstruct;
 import java.util.List;
 
 @Service
@@ -18,49 +17,47 @@ public class ProductDao implements IProductDao {
         this.sessionService = sessionService;
     }
 
-    @PostConstruct
-    public void postConstruct() {
-        this.session = sessionService.getSession();
-    }
-
     @Override
     public Product findById(Long id) {
+        session = sessionService.getSession();
         transaction = session.beginTransaction();
         Product product = session.find(Product.class, id);
         transaction.commit();
+        session.close();
 
         return product;
     }
 
     @Override
     public List<Product> findAll() {
+        session = sessionService.getSession();
         transaction = session.beginTransaction();
         List<Product> productList = session
                 .createQuery("SELECT p FROM Product p", Product.class)
                 .getResultList();
         transaction.commit();
+        session.close();
 
         return productList;
     }
 
     @Override
     public void deleteById(Long id) {
+        session = sessionService.getSession();
         transaction = session.beginTransaction();
         Product product = session.find(Product.class, id);
         session.delete(product);
         transaction.commit();
+        session.close();
     }
 
     @Override
     public Product saveOrUpdate(Product product) {
+        session = sessionService.getSession();
         transaction = session.beginTransaction();
-        if (product.getId() == null) {
-            Long id = (Long) session.save(product);
-            product = session.find(Product.class, id);
-        } else {
-            product = (Product) session.merge(product);
-        }
+        session.saveOrUpdate(product);
         transaction.commit();
+        session.close();
 
         return product;
     }
