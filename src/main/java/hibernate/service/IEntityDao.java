@@ -1,12 +1,10 @@
 package hibernate.service;
 
-import hibernate.dto.Product;
-
 import java.util.List;
 
-public interface IEntityDao {
-    Product findById(Long id);
-    List<Product> findAll();
+public interface IEntityDao<T> {
+    T findById(Long id);
+    List<T> findAll();
     void deleteById(Long id);
-    Product saveOrUpdate(Product product);
+    T saveOrUpdate(T entity);
 }
