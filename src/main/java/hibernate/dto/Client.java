@@ -1,6 +1,7 @@
 package hibernate.dto;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -14,7 +15,7 @@ public class Client {
     @Column(name = "NAME")
     private String name;
 
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "CART",
             joinColumns = @JoinColumn(name = "CLIENT_ID"),

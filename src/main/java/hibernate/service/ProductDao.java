@@ -59,6 +59,6 @@ public class ProductDao implements IEntityDao<Product> {
         transaction.commit();
         session.close();
 
-        return product;
+        return findById(product.getId());
     }
 }

@@ -59,6 +59,6 @@ public class ClientDao implements IEntityDao<Client> {
         transaction.commit();
         session.close();
 
-        return client;
+        return findById(client.getId());
     }
 }
