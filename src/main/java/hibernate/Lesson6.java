@@ -23,8 +23,8 @@ public class Lesson6 {
         client = clientDao.saveOrUpdate(new Client("Вася"));
         System.out.println("Новый клиент: " + client);
 
-        client.addProduct(productDao.findById(6L));
-        client.addProduct(productDao.findById(1L));
+        client.getProductList().add(productDao.findById(6L));
+        client.getProductList().add(productDao.findById(1L));
         clientDao.saveOrUpdate(client);
 
         System.out.println("Покупки нового клиента: " + clientDao.findById(client.getId()));
@@ -32,8 +32,8 @@ public class Lesson6 {
         client = clientDao.findById(1L);
         System.out.println("Старый клиент: " + client);
 
-        client.addProduct(productDao.findById(6L));
-        client.addProduct(productDao.findById(3L));
+        client.getProductList().add(productDao.findById(6L));
+        client.getProductList().add(productDao.findById(3L));
         clientDao.saveOrUpdate(client);
 
         System.out.println("Покупки старого клиента: " + clientDao.findById(client.getId()));

@@ -1,7 +1,15 @@
 package hibernate.dto;
 
-import javax.persistence.*;
-import java.util.ArrayList;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.Table;
 import java.util.List;
 
 @Entity
@@ -31,11 +39,6 @@ public class Client {
         this.name = name;
     }
 
-    public Client(Long id, String name) {
-        this.id = id;
-        this.name = name;
-    }
-
     public Long getId() {
         return id;
     }
@@ -48,20 +51,14 @@ public class Client {
         return productList;
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setProductList(List<Product> productList) {
-        this.productList = productList;
-    }
-
-    public void addProduct(Product product) {
-        this.productList.add(product);
+    private String showProductList() {
+        StringBuilder str = new StringBuilder();
+        str.append('{');
+        for (Product product : productList) {
+            str.append('[' + product.getTitle() + ']');
+        }
+        str.append('}');
+        return str.toString();
     }
 
     @Override
@@ -71,15 +68,5 @@ public class Client {
                 ", name='" + name + '\'' +
                 ", productList=" + showProductList() +
                 '}';
-    }
-
-    private String showProductList() {
-        StringBuilder str = new StringBuilder();
-        str.append('{');
-        for (Product product : productList) {
-            str.append('[' + product.getTitle() + ']');
-        }
-        str.append('}');
-        return str.toString();
     }
 }

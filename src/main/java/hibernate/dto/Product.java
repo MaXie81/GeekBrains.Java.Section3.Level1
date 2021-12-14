@@ -1,6 +1,13 @@
 package hibernate.dto;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.Table;
 import java.util.List;
 
 @Entity
@@ -30,12 +37,6 @@ public class Product {
         this.price = price;
     }
 
-    public Product(Long id, String title, int price) {
-        this.id = id;
-        this.title = title;
-        this.price = price;
-    }
-
     public Long getId() {
         return id;
     }
@@ -50,22 +51,6 @@ public class Product {
 
     public List<Client> getClientList() {
         return clientList;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public void setPrice(int price) {
-        this.price = price;
-    }
-
-    public void setClientList(List<Client> clientList) {
-        this.clientList = clientList;
     }
 
     public String showClientList() {
