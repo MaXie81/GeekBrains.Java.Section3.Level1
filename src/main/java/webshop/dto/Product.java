@@ -1,25 +1,23 @@
 package webshop.dto;
 
+import lombok.*;
+
+import javax.persistence.*;
+
+@Entity
+@Table(name = "PRODUCT")
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class Product {
-    private final Integer id;
-    private final String title;
-    private final float cost;
-
-    public Product(int id, String title, float cost) {
-        this.id = id;
-        this.title = title;
-        this.cost = cost;
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public float getCost() { return cost; }
+    @Id
+    @Column(name = "ID")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    @Column(name = "TITLE")
+    private String title;
+    @Column(name = "COST")
+    private float cost;
 
     @Override
     public String toString() {

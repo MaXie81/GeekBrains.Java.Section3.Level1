@@ -1,34 +1,39 @@
 package webshop.repository;
 
+import org.hibernate.Session;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 import webshop.dto.Product;
 
 import javax.annotation.PostConstruct;
+import javax.persistence.PersistenceContext;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
-@Component
+@Repository
 public class ProductRepository {
-    private final String FILE_NAME = "product.data"; // "products.data";
-    private final String FILE_TEXT_SEPARATOR = "/";
-    private List<Product> listOfAvailableProducts = new ArrayList<>();
+    @PersistenceContext
+    Session session;
 
-    @PostConstruct
-    private void init() {
-        ClassLoader loader = this.getClass().getClassLoader();
-        try (BufferedReader br = new BufferedReader(new InputStreamReader(loader.getResourceAsStream(FILE_NAME)))) {
-            while (br.ready()) {
-                String[] arrWord = br.readLine().split(FILE_TEXT_SEPARATOR);
-                listOfAvailableProducts.add(new Product(Integer.valueOf(arrWord[0]), arrWord[1], Float.valueOf(arrWord[2])));
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    @Transactional(readOnly = true)
+    public List<Product> findAll() {
+        return session.createQuery("select p from Product p", Product.class).getResultList();
     }
-
-    public List<Product> getListOfAvailableProducts() {
-        return listOfAvailableProducts;
+    @Transactional(readOnly = true)
+    public Optional<Product> findById(Long id) {
+        return Optional.ofNullable(session.find(Product.class, id));
     }
-    public void addProduct(Product product) {listOfAvailableProducts.add(product);}
+    @Transactional
+    public void save(Product product) {
+        session.save(product);
+    }
+    @Transactional
+    public void deleteById(Long id) {
+        session.createQuery("delete from Product where id = :id")
+                .setParameter("id", id)
+                .executeUpdate();
+    }
 }
