@@ -28,13 +28,13 @@
                             <td th:text="${p.title}"/>
                             <td th:text="${p.cost}"/>
                             <td></td>
-                            <td><a type="button" class="btn btn-primary" th:href="@{'/product/info/' + ${p.id}}">Подробнее</a></td>
+                            <td><a type="button" class="btn btn-primary" th:href="@{'/products/' + ${p.id}}">Подробнее</a></td>
                         </tr>
                     </tbody>
                 </table>
                 <div class="col-6 mt-3">
                     <a type="button" class="btn btn-primary" th:href=@{'/'}>Назад</a>
-                    <a type="button" class="btn btn-primary" th:href=@{'/product/add'}>Добавить продукт</a>
+                    <a type="button" class="btn btn-primary" th:href=@{'/products/add'}>Добавить продукт</a>
                 </div>
             </div>
         </div>

@@ -1,6 +1,7 @@
 package webshop.repository;
 
 import org.hibernate.Session;
+import org.hibernate.query.Query;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import webshop.dto.Product;
@@ -21,7 +22,7 @@ public class ProductRepository {
 
     @Transactional(readOnly = true)
     public Optional<Product> findById(Long id) {
-        return Optional.ofNullable(session.find(Product.class, id));
+        return Optional.ofNullable(session.get(Product.class, id));
     }
 
     @Transactional

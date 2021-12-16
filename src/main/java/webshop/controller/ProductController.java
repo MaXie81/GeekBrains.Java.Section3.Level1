@@ -6,11 +6,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestMapping;
 import webshop.dto.Product;
 import webshop.service.ProductService;
 
 @Controller
+@RequestMapping("/products")
 public class ProductController {
     ProductService productService;
 
@@ -20,36 +21,30 @@ public class ProductController {
     }
 
     @GetMapping("/")
-    public String getIndex() {
-        return "index";
-    }
-
-    @GetMapping("/product/all")
     public String getAllProducts(Model model) {
         model.addAttribute("listOfProducts", productService.getAllProducts());
-        model.addAttribute("var", "test1");
         return "all_products";
     }
-    @GetMapping("/product/info/{id}")
+    @GetMapping("/{id}")
     public String getProductInfo(Model model, @PathVariable Long id) {
         model.addAttribute("product", productService.getProductById(id));
         return "product_info";
     }
 
-    @GetMapping("/product/delete/{id}")
+    @GetMapping("/delete/{id}")
     public String deleteProduct(@PathVariable Long id) {
         productService.deleteProductById(id);
-        return "redirect:/product/all";
+        return "redirect:/products/";
     }
 
-    @GetMapping("/product/add")
+    @GetMapping("/add")
     public String addProduct(Model model) {
         model.addAttribute("nextId", productService.getProductLastId() + 1);
         return "add_product";
     }
-    @PostMapping("/product/add")
-    public String addProduct(@RequestParam Long id, @RequestParam String title, @RequestParam Float cost) {
-        productService.addProduct(new Product(id, title, cost));
-        return "redirect:/product/all";
+    @PostMapping("/add")
+    public String addProduct(Product product) {
+        productService.addProduct(product);
+        return "redirect:/products/";
     }
 }

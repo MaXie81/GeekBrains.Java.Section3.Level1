@@ -12,7 +12,7 @@
     <body>
         <div class="container-sm">
             <div class="col-6">
-                <form method="post" th:action="@{'/product/add'}" class="row g-2">
+                <form method="post" th:action="@{'/products/add'}" class="row g-2">
                     <legend>Продукт</legend>
                     <div class="col-12">
                         <label for="id" class="form-label"><b>Id</b></label>
@@ -27,8 +27,8 @@
                         <input type="number" name="cost" class="form-control" id="cost" step="any" placeholder="Цена">
                     </div>
                     <div class="col-12 mt-3">
-                        <a type="button" class="btn btn-primary" th:href=@{'/product/all'}>Назад</a>
-                        <button type="submit" class="btn btn-primary" th:href=@{'/product/add'}>Добавить</button>
+                        <a type="button" class="btn btn-primary" th:href=@{'/products/'}>Назад</a>
+                        <button type="submit" class="btn btn-primary" th:href=@{'/products/add'}>Добавить</button>
                     </div>
                 </form>
             </div>

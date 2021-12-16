@@ -5,7 +5,6 @@ import org.springframework.stereotype.Service;
 import webshop.dto.Product;
 import webshop.repository.ProductRepository;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
