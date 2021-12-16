@@ -1,39 +1,11 @@
 package webshop.repository;
 
-import org.hibernate.Session;
-import org.hibernate.query.Query;
-import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import webshop.dto.Product;
 
-import javax.persistence.PersistenceContext;
-import java.util.List;
-import java.util.Optional;
+public interface ProductRepository extends JpaRepository<Product, Long> {
 
-@Repository
-public class ProductRepository {
-    @PersistenceContext
-    Session session;
-
-    @Transactional(readOnly = true)
-    public List<Product> findAll() {
-        return session.createQuery("select p from Product p", Product.class).getResultList();
-    }
-
-    @Transactional(readOnly = true)
-    public Optional<Product> findById(Long id) {
-        return Optional.ofNullable(session.get(Product.class, id));
-    }
-
-    @Transactional
-    public void save(Product product) {
-        session.save(product);
-    }
-
-    @Transactional
-    public void deleteById(Long id) {
-        session.createQuery("delete from Product where id = :id")
-                .setParameter("id", id)
-                .executeUpdate();
-    }
+    @Query("select max(id) from Product")
+    Long getLastId();
 }

@@ -24,18 +24,11 @@ public class ProductService {
         Optional<Product> optionalProduct = assortment.findById(id);
         return optionalProduct.isPresent() ? optionalProduct.get() : new Product(null, null, null) ;
     }
-    public Product getProductByName(String name) {
-        Optional<Product> optionalProduct = assortment.findAll()
-                .stream()
-                .filter(p -> p.getTitle().equals(name))
-                .findFirst();
-        return optionalProduct.isPresent() ? optionalProduct.get() : new Product(null, null, null) ;
-    }
     public void addProduct(Product product) {
         assortment.save(product);
     }
-    public void deleteProductById(Long id) {assortment.deleteById(id);}
+    public void deleteProduct(Long id) {assortment.deleteById(id);}
     public Long getProductLastId() {
-        return assortment.findAll().stream().map(Product::getId).max(Long::compare).get();
+        return assortment.getLastId();
     }
 }

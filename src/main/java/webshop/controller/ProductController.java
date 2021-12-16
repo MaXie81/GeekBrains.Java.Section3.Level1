@@ -30,13 +30,11 @@ public class ProductController {
         model.addAttribute("product", productService.getProductById(id));
         return "product_info";
     }
-
     @GetMapping("/delete/{id}")
     public String deleteProduct(@PathVariable Long id) {
-        productService.deleteProductById(id);
+        productService.deleteProduct(id);
         return "redirect:/products/";
     }
-
     @GetMapping("/add")
     public String addProduct(Model model) {
         model.addAttribute("nextId", productService.getProductLastId() + 1);
