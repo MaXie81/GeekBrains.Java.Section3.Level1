@@ -7,6 +7,7 @@ import webshop.repository.ProductRepository;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ProductService {
@@ -18,18 +19,24 @@ public class ProductService {
     }
 
     public List<Product> getAllProducts() {
-        return new ArrayList<>(assortment.getListOfAvailableProducts());
+        return assortment.findAll();
     }
-    public void addProduct(Product product) {
-        assortment.addProduct(product);
-    }
-    public Product getProductById(Integer id) {
-        return assortment.getListOfAvailableProducts().stream().filter(p -> p.getId() == id).findFirst().orElseGet(null);
+    public Product getProductById(Long id) {
+        Optional<Product> optionalProduct = assortment.findById(id);
+        return optionalProduct.isPresent() ? optionalProduct.get() : new Product(null, null, null) ;
     }
     public Product getProductByName(String name) {
-        return assortment.getListOfAvailableProducts().stream().filter(p -> p.getTitle().equals(name)).findFirst().orElseGet(null);
+        Optional<Product> optionalProduct = assortment.findAll()
+                .stream()
+                .filter(p -> p.getTitle().equals(name))
+                .findFirst();
+        return optionalProduct.isPresent() ? optionalProduct.get() : new Product(null, null, null) ;
     }
-    public int getProductLastId() {
-        return assortment.getListOfAvailableProducts().stream().map(Product::getId).max(Integer::compare).get();
+    public void addProduct(Product product) {
+        assortment.save(product);
+    }
+    public void deleteProductById(Long id) {assortment.deleteById(id);}
+    public Long getProductLastId() {
+        return assortment.findAll().stream().map(Product::getId).max(Long::compare).get();
     }
 }

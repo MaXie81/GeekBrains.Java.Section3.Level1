@@ -17,7 +17,7 @@ public class Product {
     @Column(name = "TITLE")
     private String title;
     @Column(name = "COST")
-    private float cost;
+    private Float cost;
 
     @Override
     public String toString() {

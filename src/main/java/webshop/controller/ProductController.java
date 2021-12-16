@@ -31,7 +31,7 @@ public class ProductController {
         return "all_products";
     }
     @GetMapping("/product/info/{id}")
-    public String getProductInfo(Model model, @PathVariable Integer id) {
+    public String getProductInfo(Model model, @PathVariable Long id) {
         model.addAttribute("product", productService.getProductById(id));
         return "product_info";
     }
@@ -41,7 +41,7 @@ public class ProductController {
         return "add_product";
     }
     @PostMapping("/product/add")
-    public String addProduct(@RequestParam Integer id, @RequestParam String title, @RequestParam Float cost) {
+    public String addProduct(@RequestParam Long id, @RequestParam String title, @RequestParam Float cost) {
         productService.addProduct(new Product(id, title, cost));
         return "redirect:/product/all";
     }
