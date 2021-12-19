@@ -7,18 +7,18 @@
                 rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
                 crossorigin="anonymous"
         >
-        <title th:text="#{title.dictionary.product}">Справочник продуктов</title>
+        <title th:text="#{title.product.dictionary}">Справочник продуктов</title>
     </head>
     <body>
         <div class="container-sm">
             <div class="col-6">
-                <legend th:text="#{title.dictionary.product}">Справочник продуктов</legend>
+                <legend th:text="#{title.product.dictionary}">Справочник продуктов</legend>
                 <table class="table table-striped">
                     <thead>
                         <tr>
-                            <th scope="col">Id</th>
-                            <th scope="col">Наименование</th>
-                            <th class="text-right">Цена</th>
+                            <th scope="col" th:text="#{column.product.id}">Id</th>
+                            <th scope="col" th:text="#{column.product.title}">Наименование</th>
+                            <th class="text-right" th:text="#{column.product.cost}">Цена</th>
                             <th scope="col"></th>
                         </tr>
                     </thead>
@@ -28,14 +28,14 @@
                             <td th:text="${p.title}"/>
                             <td th:text="${p.cost}"/>
                             <td></td>
-                            <td><a type="button" class="btn btn-primary" th:href="@{'/products/info/' + ${p.id}}">Подробнее</a></td>
-                            <td><a type="button" class="btn btn-danger"  th:href="@{'/products/delete/' + ${p.id}}">Удалить</a></td>
+                            <td><a type="button" class="btn btn-primary" th:text="#{button.info}" th:href="@{'/products/info/' + ${p.id}}">Подробнее</a></td>
+                            <td><a type="button" class="btn btn-danger"  th:text="#{button.delete}" th:href="@{'/products/delete/' + ${p.id}}">Удалить</a></td>
                         </tr>
                     </tbody>
                 </table>
                 <div class="col-6 mt-3">
-                    <a type="button" class="btn btn-primary" th:href=@{'/'}>Назад</a>
-                    <a type="button" class="btn btn-primary" th:href=@{'/products/add'}>Добавить продукт</a>
+                    <a type="button" class="btn btn-primary" th:text="#{button.back}" th:href=@{'/'}>Назад</a>
+                    <a type="button" class="btn btn-primary" th:text="#{button.add}" th:href=@{'/products/add'}>Добавить продукт</a>
                 </div>
             </div>
         </div>

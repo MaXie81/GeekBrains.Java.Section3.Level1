@@ -7,28 +7,31 @@
                 rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
                 crossorigin="anonymous"
         >
-        <title>Добавление нового продукта</title>
+        <title th:text="#{title.product.additional}">Добавление нового продукта</title>
     </head>
     <body>
         <div class="container-sm">
             <div class="col-6">
-                <form method="post" th:action="@{'/products/add'}" class="row g-2">
-                    <legend>Продукт</legend>
+                <form method="post" th:action="@{'/products/add'}" class="row g-2" th:object="${product}">
+                    <legend th:text="#{title.product.additional}">Продукт</legend>
                     <div class="col-12">
                         <label for="id" class="form-label"><b>Id</b></label>
                         <input type="number" name="id" class="form-control" id="id" th:value="${nextId}" readonly>
                     </div>
                     <div class="col-12">
                         <label for="title" class="form-label"><b>Наименование</b></label>
-                        <input type="text" name="title" class="form-control" id="title" placeholder="Наименование">
+<!--                        <input type="text" name="title" class="form-control" id="title" placeholder="Наименование" th:field="*{title}">-->
+                        <input type="text" class="form-control" id="title" placeholder="Наименование" th:field="*{title}">
+                    </div>
+                    <div th:each="err : ${#fields.errors('title')}" th:text="${err}" class="alert alert-danger">
                     </div>
                     <div class="col-12">
                         <label for="cost" class="form-label"><b>Цена</b></label>
                         <input type="number" name="cost" class="form-control" id="cost" step="any" placeholder="Цена">
                     </div>
                     <div class="col-12 mt-3">
-                        <a type="button" class="btn btn-primary" th:href=@{'/products/'}>Назад</a>
-                        <button type="submit" class="btn btn-primary" th:href=@{'/products/add'}>Добавить</button>
+                        <a type="button" class="btn btn-primary" th:text="#{button.back}" th:href=@{'/products/'}>Назад</a>
+                        <button type="submit" class="btn btn-primary" th:text="#{button.add}" th:href=@{'/products/add'}>Добавить</button>
                     </div>
                 </form>
             </div>
