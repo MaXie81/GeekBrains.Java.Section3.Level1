@@ -7,12 +7,12 @@
                 rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
                 crossorigin="anonymous"
         >
-        <title>Справочник продуктов</title>
+        <title th:text="#{title.dictionary.product}">Справочник продуктов</title>
     </head>
     <body>
         <div class="container-sm">
             <div class="col-6">
-                <legend>Справочник продуктов</legend>
+                <legend th:text="#{title.dictionary.product}">Справочник продуктов</legend>
                 <table class="table table-striped">
                     <thead>
                         <tr>
@@ -28,7 +28,8 @@
                             <td th:text="${p.title}"/>
                             <td th:text="${p.cost}"/>
                             <td></td>
-                            <td><a type="button" class="btn btn-primary" th:href="@{'/products/' + ${p.id}}">Подробнее</a></td>
+                            <td><a type="button" class="btn btn-primary" th:href="@{'/products/info/' + ${p.id}}">Подробнее</a></td>
+                            <td><a type="button" class="btn btn-danger"  th:href="@{'/products/delete/' + ${p.id}}">Удалить</a></td>
                         </tr>
                     </tbody>
                 </table>

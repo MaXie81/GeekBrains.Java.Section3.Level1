@@ -7,14 +7,14 @@
             crossorigin="anonymous"
     >
     <meta charset="UTF-8">
-    <title>Продукты</title>
+    <title th:text="#{title.product}">Продукты</title>
 </head>
 <body>
 <div class="container-sm">
     <div class="col-6">
-        <legend>Продукты</legend>
+        <legend th:text="#{title.product}">Продукты</legend>
         <div class="col-12 mt-3">
-            <a type="button" class="btn btn-primary" th:href=@{'/products/'}>Справочник продуктов</a>
+            <a type="button" class="btn btn-primary" th:text="#{title.dictionary.product}" th:href=@{'/products/'}>Справочник продуктов</a>
         </div>
     </div>
 </div>
