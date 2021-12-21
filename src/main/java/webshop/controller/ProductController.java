@@ -41,14 +41,13 @@ public class ProductController {
     }
     @GetMapping("/add")
     public String addProduct(Model model) {
-        model.addAttribute("nextId", productService.getProductLastId() + 1);
-        model.addAttribute("product", new ProductDto());
+        model.addAttribute("productDto", new ProductDto(productService.getProductLastId() + 1));
         return "add_product";
     }
     @PostMapping("/add")
-    public String addProduct(@Valid ProductDto productDto) {
-//    public String addProduct(@Valid ProductDto productDto, BindingResult bindingResult) { // "забивает" на все аннотации валидации
-//        if (bindingResult.hasErrors()) return "add_product";  // выпадает с ошибкой 500
+    public String addProduct(@Valid ProductDto productDto, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) return "add_product";
+        System.out.println(productDto);
         productService.addProduct(productDto);
         return "redirect:/products/";
     }

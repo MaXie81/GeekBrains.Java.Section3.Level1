@@ -23,6 +23,10 @@ public class ProductDto {
     @Positive
     private Float cost;
 
+    public ProductDto(@NotNull Long id) {
+        this.id = id;
+    }
+
     @Override
     public String toString() {
         return "ProductDto{" +
