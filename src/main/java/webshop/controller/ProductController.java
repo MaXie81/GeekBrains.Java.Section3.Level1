@@ -1,6 +1,8 @@
 package webshop.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -25,8 +27,8 @@ public class ProductController {
     }
 
     @GetMapping("/")
-    public String getAllProducts(Model model) {
-        model.addAttribute("listOfProducts", productService.getAllProducts());
+    public String getAllProducts(Model model, @PageableDefault(size = 5, page = 0) Pageable pageable) {
+        model.addAttribute("listOfProducts", productService.getAllProductsPage(pageable));
         return "all_products";
     }
     @GetMapping("/info/{id}")

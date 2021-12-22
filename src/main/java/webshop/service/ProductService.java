@@ -1,7 +1,7 @@
 package webshop.service;
 
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import webshop.dto.Product;
 import webshop.dto.ProductDto;
@@ -25,6 +25,14 @@ public class ProductService {
 
     public List<ProductDto> getAllProducts() {
         List<ProductDto> productDtoList = assortment.findAll()
+                .stream()
+                .map(product -> getProductDto(product))
+                .collect(Collectors.toList());
+
+        return productDtoList;
+    }
+    public List<ProductDto> getAllProductsPage(Pageable pageable) {
+        List<ProductDto> productDtoList = assortment.findAll(pageable)
                 .stream()
                 .map(product -> getProductDto(product))
                 .collect(Collectors.toList());
