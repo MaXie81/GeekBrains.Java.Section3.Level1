@@ -5,7 +5,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
@@ -32,26 +31,24 @@ public class RestProductController {
         return productService.getAllProductsPage(pageable);
     }
     @GetMapping("/{id}")
-    public ProductDto getProductInfo(@PathVariable Long id) {
-        return productService.getProductById(id);
+    public ResponseEntity<ProductDto> getProductById(@PathVariable Long id) {
+        return new ResponseEntity<>(productService.getProductById(id), HttpStatus.OK);
     }
     @PostMapping
-//    public ResponseEntity<ProductDto> addProduct(@Valid @RequestBody ProductDto productDto, BindingResult bindingResult) {
     public ResponseEntity<ProductDto> addProduct(@Valid @RequestBody ProductDto productDto) {
-        productDto.setId(productService.getProductLastId() + 1);
+        productDto.setId(null);
         productService.addProduct(productDto);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
     @PutMapping
-    public Boolean putProduct(@Valid @RequestBody ProductDto productDto, BindingResult bindingResult) {
-        if (bindingResult.hasErrors()) return Boolean.valueOf(false);
+    public ResponseEntity<ProductDto> putProduct(@Valid @RequestBody ProductDto productDto) {
         productService.addProduct(productDto);
-        return Boolean.valueOf(true);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
     @DeleteMapping("/{id}")
-    public Boolean deleteProduct(@PathVariable Long id) {
+    public ResponseEntity<ProductDto> deleteProductById(@PathVariable Long id) {
         productService.deleteProduct(id);
-        return true;
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @ExceptionHandler
@@ -66,4 +63,3 @@ public class RestProductController {
         return new ResponseEntity<>(mapErrors, HttpStatus.BAD_REQUEST);
     }
 }
-

@@ -25,17 +25,4 @@ public class Product {
     private String title;
     @Column(name = "COST")
     private Float cost;
-
-    @Override
-    public String toString() {
-        return "[\"" + title + "\" : " + cost + "]";
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof webshop.dto.Product)) return false;
-        webshop.dto.Product product = (webshop.dto.Product) o;
-        return getTitle().equals(product.getTitle());
-    }
 }

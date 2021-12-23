@@ -1,16 +1,14 @@
 package webshop.dto;
 
 import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
 
-@Getter
-@Setter
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class ProductDto {
@@ -24,14 +22,5 @@ public class ProductDto {
 
     public ProductDto(@NotNull Long id) {
         this.id = id;
-    }
-
-    @Override
-    public String toString() {
-        return "ProductDto{" +
-                "id=" + id +
-                ", title='" + title + '\'' +
-                ", cost=" + cost +
-                '}';
     }
 }

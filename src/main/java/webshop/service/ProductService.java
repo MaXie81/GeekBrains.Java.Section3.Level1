@@ -8,7 +8,6 @@ import webshop.dto.ProductDto;
 import webshop.repository.ProductRepository;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -40,8 +39,7 @@ public class ProductService {
         return productDtoList;
     }
     public ProductDto getProductById(Long id) {
-        Optional<Product> optionalProduct = assortment.findById(id);
-        return optionalProduct.isPresent() ? getProductDto(optionalProduct.get()) : getProductDto(null) ;
+        return getProductDto(assortment.findById(id).orElse(null));
     }
     public void addProduct(ProductDto productDto) {
         assortment.save(getProduct(productDto));
