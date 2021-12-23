@@ -5,7 +5,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
@@ -16,11 +15,11 @@ import javax.validation.constraints.Positive;
 @AllArgsConstructor
 public class ProductDto {
     private Long id;
-    @NotNull
-    @NotEmpty
+    @NotNull(message = "{validation.productdto.title.null}")
+    @NotEmpty(message = "{validation.productdto.title.eampty}")
     private String title;
-    @NotNull
-    @Positive
+    @NotNull(message = "{validation.productdto.cost.null}")
+    @Positive(message = "{validation.productdto.cost.positive}")
     private Float cost;
 
     public ProductDto(@NotNull Long id) {
