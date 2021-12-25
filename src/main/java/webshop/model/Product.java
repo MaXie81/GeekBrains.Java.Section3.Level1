@@ -1,4 +1,4 @@
-package webshop.dto;
+package webshop.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

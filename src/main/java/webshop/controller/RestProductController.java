@@ -1,5 +1,6 @@
 package webshop.controller;
 
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
@@ -9,6 +10,8 @@ import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 import webshop.dto.ProductDto;
+import webshop.model.Product;
+import webshop.service.CartService;
 import webshop.service.ProductService;
 
 import javax.validation.Valid;
@@ -18,13 +21,9 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/rest/products")
+@AllArgsConstructor
 public class RestProductController {
     ProductService productService;
-
-    @Autowired
-    public void setProductService(ProductService productService) {
-        this.productService = productService;
-    }
 
     @GetMapping
     public List<ProductDto> getAllProducts(@PageableDefault(size = 5, page = 0) Pageable pageable) {
