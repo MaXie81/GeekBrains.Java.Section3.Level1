@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
+import webshop.converter.ProductMapper;
 import webshop.dto.ProductDto;
 import webshop.model.Product;
 import webshop.service.CartService;
@@ -27,21 +28,21 @@ public class RestProductController {
 
     @GetMapping
     public List<ProductDto> getAllProducts(@PageableDefault(size = 5, page = 0) Pageable pageable) {
-        return productService.getAllProductsPage(pageable);
+        return ProductMapper.MAPPER.fromProductList(productService.getAllProductsPage(pageable));
     }
     @GetMapping("/{id}")
     public ResponseEntity<ProductDto> getProductById(@PathVariable Long id) {
-        return new ResponseEntity<>(productService.getProductById(id), HttpStatus.OK);
+        return new ResponseEntity<ProductDto>(ProductMapper.MAPPER.fromProduct(productService.getProductById(id)), HttpStatus.OK);
     }
     @PostMapping
     public ResponseEntity<ProductDto> addProduct(@Valid @RequestBody ProductDto productDto) {
         productDto.setId(null);
-        productService.addProduct(productDto);
+        productService.addProduct(ProductMapper.MAPPER.toProduct(productDto));
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
     @PutMapping
     public ResponseEntity<ProductDto> putProduct(@Valid @RequestBody ProductDto productDto) {
-        productService.addProduct(productDto);
+        productService.addProduct(ProductMapper.MAPPER.toProduct(productDto));
         return new ResponseEntity<>(HttpStatus.OK);
     }
     @DeleteMapping("/{id}")

@@ -26,4 +26,5 @@ public class CartService {
     public List<Product> getProductList() {
         return cart.getProductList();
     }
+    public Cart getCart() {return cart;}
 }

@@ -46,11 +46,11 @@ public class ProductController {
         model.addAttribute("productDto", new ProductDto(productService.getProductLastId() + 1));
         return "add_product";
     }
-    @PostMapping("/add")
-    public String addProduct(@Valid ProductDto productDto, BindingResult bindingResult) {
-        if (bindingResult.hasErrors()) return "add_product";
-        System.out.println(productDto);
-        productService.addProduct(productDto);
-        return "redirect:/products/";
-    }
+//    @PostMapping("/add")
+//    public String addProduct(@Valid ProductDto productDto, BindingResult bindingResult) {
+//        if (bindingResult.hasErrors()) return "add_product";
+//        System.out.println(productDto);
+//        productService.addProduct(productDto);
+//        return "redirect:/products/";
+//    }
 }

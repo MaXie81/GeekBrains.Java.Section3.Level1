@@ -6,6 +6,9 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import webshop.converter.CartMapper;
+import webshop.converter.ProductMapper;
+import webshop.dto.CartDto;
 import webshop.dto.ProductDto;
 import webshop.model.Product;
 import webshop.service.CartService;
@@ -20,12 +23,12 @@ public class RestCartController {
     CartService cartService;
 
     @GetMapping
-    public List<Product> getAllProducts() {
-        return cartService.getProductList();
+    public CartDto getCart() {
+        return CartMapper.MAPPER.fromCart(cartService.getCart());
     }
     @PostMapping
-    public ResponseEntity<Product> addProduct(@RequestBody Product product) {
-        cartService.addProduct(product);
+    public ResponseEntity<ProductDto> addProduct(@RequestBody ProductDto productDto) {
+        cartService.addProduct(ProductMapper.MAPPER.toProduct(productDto));
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
     @DeleteMapping("/{id}")
