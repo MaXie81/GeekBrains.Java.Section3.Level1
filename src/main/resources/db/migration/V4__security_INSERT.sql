@@ -1,0 +1,5 @@
+INSERT INTO USERS VALUES('user', '{noop}user', true);
+INSERT INTO USERS VALUES('admin', '{noop}admin', true);
+
+INSERT INTO AUTHORITIES VALUES('user', 'ROLE_USER');
+INSERT INTO AUTHORITIES VALUES('admin', 'ROLE_ADMIN');
