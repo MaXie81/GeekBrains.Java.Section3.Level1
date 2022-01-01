@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <link
+                href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+                rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+                crossorigin="anonymous"
+        >
+        <title th:text="#{title.product.information}">Редактирование данных о продукте</title>
+    </head>
+    <body>
+        <div class="container-sm" >
+            <div class="col-6">
+                <form method="post" th:action="@{'/products/add'}" class="row g-2" th:object="${productDto}">
+                    <legend th:text="#{title.product.information}">Продукт</legend>
+                    <div class="col-12" >
+                        <label for="Id" class="form-label"><b th:text="#{column.product.id}">Id</b></label>
+                        <input type="text" id="Id" class="form-control" th:field=="*{id}" readonly>
+                    </div>
+                    <div class="col-12">
+                        <label for="title" class="form-label"><b th:text="#{column.product.title}">Наименование</b></label>
+                        <input type="text" id="title" class="form-control" th:field=="*{title}">
+                    </div>
+                    <div class="col-12">
+                        <label for="Cost" class="form-label"><b th:text="#{column.product.cost}">Цена</b></label>
+                        <input type="number" step=0.01 class="form-control" id="cost" th:field="*{cost}">
+                    </div>
+                    <div class="col-12 mt-3">
+                        <a type="button" class="btn btn-primary" th:text="#{button.back}" th:href=@{'/products/'}>Назад</a>
+                        <button type="submit" class="btn btn-primary" th:text="#{button.edit}" th:href=@{'/products/edit'}>Изменить</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </body>
+</html>

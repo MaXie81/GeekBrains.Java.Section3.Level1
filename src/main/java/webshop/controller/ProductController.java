@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import webshop.converter.ProductMapper;
 import webshop.dto.ProductDto;
 import webshop.service.ProductService;
 
@@ -36,6 +37,17 @@ public class ProductController {
         model.addAttribute("product", productService.getProductById(id));
         return "product_info";
     }
+    @GetMapping("/edit/{id}")
+    public String editProductInfo(Model model, @PathVariable Long id) {
+        model.addAttribute("productDto", ProductMapper.MAPPER.fromProduct(productService.getProductById(id)));
+        return "edit_product";
+    }
+    @PostMapping("/edit")
+    public String editProductInfo(@Valid ProductDto productDto, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) return "edit_product";
+        productService.editProduct(ProductMapper.MAPPER.toProduct(productDto));
+        return "redirect:/products/";
+    }
     @GetMapping("/delete/{id}")
     public String deleteProduct(@PathVariable Long id) {
         productService.deleteProduct(id);
@@ -46,11 +58,10 @@ public class ProductController {
         model.addAttribute("productDto", new ProductDto(productService.getProductLastId() + 1));
         return "add_product";
     }
-//    @PostMapping("/add")
-//    public String addProduct(@Valid ProductDto productDto, BindingResult bindingResult) {
-//        if (bindingResult.hasErrors()) return "add_product";
-//        System.out.println(productDto);
-//        productService.addProduct(productDto);
-//        return "redirect:/products/";
-//    }
+    @PostMapping("/add")
+    public String addProduct(@Valid ProductDto productDto, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) return "add_product";
+        productService.addProduct(ProductMapper.MAPPER.toProduct(productDto));
+        return "redirect:/products/";
+    }
 }

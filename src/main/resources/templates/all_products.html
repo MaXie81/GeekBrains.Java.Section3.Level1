@@ -29,6 +29,7 @@
                             <td th:text="${p.cost}"/>
                             <td></td>
                             <td><a type="button" class="btn btn-primary" th:text="#{button.info}" th:href="@{'/products/info/' + ${p.id}}">Подробнее</a></td>
+                            <td><a type="button" class="btn btn-warning" th:text="#{button.edit}" th:href="@{'/products/edit/' + ${p.id}}">Изменить</a></td>
                             <td><a type="button" class="btn btn-danger"  th:text="#{button.delete}" th:href="@{'/products/delete/' + ${p.id}}">Удалить</a></td>
                         </tr>
                     </tbody>
