@@ -1,6 +1,5 @@
 package webshop.service;
 
-import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import webshop.model.Product;
