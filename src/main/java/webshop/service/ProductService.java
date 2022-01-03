@@ -4,23 +4,18 @@ import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import webshop.model.Product;
-import webshop.dto.ProductDto;
 import webshop.repository.ProductRepository;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-@AllArgsConstructor
 public class ProductService {
     private ProductRepository productRepository;
 
-//    private ProductDto getProductDto(Product product) {
-//        return product == null ? new ProductDto() : new ProductDto(product.getId(), product.getTitle(), product.getCost());
-//    }
-//    private Product getProduct(ProductDto productDto) {
-//        return productDto == null ? new Product() : new Product(productDto.getId(), productDto.getTitle(), productDto.getCost());
-//    }
+    public ProductService(ProductRepository productRepository) {
+        this.productRepository = productRepository;
+    }
 
     public List<Product> getAllProducts() {
         return productRepository.findAll();

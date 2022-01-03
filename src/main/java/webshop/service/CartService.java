@@ -8,9 +8,12 @@ import webshop.model.Product;
 import java.util.List;
 
 @Service
-@AllArgsConstructor
 public class CartService {
     private Cart cart;
+
+    public CartService(Cart cart) {
+        this.cart = cart;
+    }
 
     public void addProduct(Product product) {
         List<Product> list = cart.getProductList();
